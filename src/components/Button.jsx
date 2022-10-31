@@ -12,6 +12,7 @@ const Button = props => {
       p-4
       text-6xl
       '
+      onClick={props.nextScene}
     >
       {props.text}
     </button>
