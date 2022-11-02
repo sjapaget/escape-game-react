@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button'
+import NextSceneBtn from './NextSceneBtn'
 
 const Scene1 = props => {
   return (
@@ -24,7 +24,7 @@ const Scene1 = props => {
       <li>No looking in the source code while you're playing</li>
       <li>etc.</li>
     </ul>
-    <Button nextScene={props.sceneChange} text="Start the game" />
+    <NextSceneBtn nextScene={props.sceneChange} text="Start the game" />
    </div>
   )
 }

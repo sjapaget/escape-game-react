@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from "./Button"
+import NextSceneBtn from "./NextSceneBtn"
 
 const Start = props => {
   return (
@@ -7,7 +7,7 @@ const Start = props => {
 
       <h1 className='text-8xl my-4'>Art Escape</h1>
 
-      <Button
+      <NextSceneBtn
         text={"Start"}
         nextScene={props.sceneChange}
        />
