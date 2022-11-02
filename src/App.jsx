@@ -13,13 +13,40 @@ function App() {
     setScene((prevScene) => prevScene + 1)
   }
 
+  const [startTime, setStartTime] = useState(Date.now);
+  const [endTime, setEndTime] = useState(Date.now);
+
+  const recordStartTime = () => {
+    setStartTime(Date.now)
+  }
+
+  const recordEndTime = () => {
+    setEndTime(Date.now)
+  }
+
+
   return (
     <div className='h-screen'>
       <Nav scene={scene} />
       <div className="flex flex-row justify-center h-5/6 p-4 bg-orange-50 font-mono">
-        {scene === 0 && <Start sceneChange={nextScene} />}
-        {scene === 1 && <Scene1 sceneChange={nextScene} />}
-        {scene === 2 && <EndScene />}
+        {scene === 0 && <Start
+                           sceneChange={nextScene}
+
+                           />
+        }
+        {scene === 1 && <Scene1
+                          startGame={recordStartTime}
+                          sceneChange={nextScene}
+
+                          />
+        }
+        {scene === 2 && <Start sceneChange={nextScene} />}
+        {scene === 3 && <EndScene
+                          endGame={recordEndTime}
+                          start={startTime}
+                          end={endTime}
+                          />
+        }
 
       </div>
     </div>
