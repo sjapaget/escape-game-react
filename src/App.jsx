@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Start from "./components/Start";
 import Scene1 from "./components/Scene1";
+import EndScene from "./components/EndScene";
 import Nav from "./components/Nav";
 
 
@@ -9,7 +10,7 @@ function App() {
   const [scene, setScene] = useState(0)
 
   const nextScene = () => {
-    setScene(prevScene => prevScene + 1)
+    setScene((prevScene) => prevScene + 1)
   }
 
   return (

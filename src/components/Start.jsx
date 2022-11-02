@@ -2,6 +2,7 @@ import React from 'react';
 import NextSceneBtn from "./NextSceneBtn"
 
 const Start = props => {
+  const { sceneChange } = props;
   return (
     <div className='flex flex-col justify-between p-12 bg-slate-100 rounded-lg'>
 
@@ -9,10 +10,10 @@ const Start = props => {
 
       <NextSceneBtn
         text={"Start"}
-        nextScene={props.sceneChange}
+        nextScene={sceneChange}
        />
     </div>
   )
 }
 
-export default Start
+export default Start;

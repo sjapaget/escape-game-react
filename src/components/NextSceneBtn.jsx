@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Button = props => {
+  // const { nextScene, text } = props;
   return (
     <button
       className='
@@ -19,4 +20,4 @@ const Button = props => {
   )
 }
 
-export default Button
+export default Button;

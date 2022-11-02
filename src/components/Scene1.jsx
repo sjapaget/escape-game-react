@@ -2,6 +2,7 @@ import React from 'react';
 import NextSceneBtn from './NextSceneBtn'
 
 const Scene1 = props => {
+  const { sceneChange } = props;
   return (
    <div>
      <p>
@@ -24,9 +25,9 @@ const Scene1 = props => {
       <li>No looking in the source code while you're playing</li>
       <li>etc.</li>
     </ul>
-    <NextSceneBtn nextScene={props.sceneChange} text="Start the game" />
+    <NextSceneBtn nextScene={sceneChange} text="Start the game" />
    </div>
   )
 }
 
-export default Scene1
+export default Scene1;
