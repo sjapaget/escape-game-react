@@ -17,7 +17,9 @@ function App() {
       <Nav scene={scene} />
       <div className="flex flex-row justify-center h-5/6 p-4 bg-orange-50 font-mono">
         {scene === 0 && <Start sceneChange={nextScene} />}
-        {scene === 1 && <Scene1 />}
+        {scene === 1 && <Scene1 sceneChange={nextScene} />}
+        {scene === 2 && <EndScene />}
+
       </div>
     </div>
 
