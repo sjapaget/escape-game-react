@@ -10,8 +10,11 @@ const EndScene = props => {
     const roundedHrs = Math.floor(hrs);
     const mins = (hrs - roundedHrs) * 60;
     const roundedMins = Math.round(mins);
-    return `${roundedMins} minute(s)`
+    const secs = (mins - roundedMins)  *60;
+    const roundedSecs = Math.round(secs)
+    return `You finished in ${roundedHrs}:${roundedMins}:${roundedSecs}`
   }
+
   return (
     <div>
       <h1>You win!</h1>
