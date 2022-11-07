@@ -22,12 +22,12 @@ function Scene2(props) {
           mb-4
         "
       >
-        What's the code?
+        {sceneCompleted ? "You Cracked it!" : "What's the code?"}
       </h1>
       <Numpad revealButton={completeScene}/>
       <p
       >
-      Click on the numbers to see if they are present in the code.
+      {sceneCompleted ? "That one was easy... the next one won't be!" : "Click on the numbers to see if they are present in the code."}
       </p>
       {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="Continue" />}
     </div>
