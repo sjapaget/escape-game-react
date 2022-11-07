@@ -31,8 +31,11 @@ function App() {
     <div className='h-screen'>
       <Nav scene={scene}/>
       <div className="flex flex-row justify-center h-5/6 p-4 bg-orange-50 font-mono">
-        {scene === 0  && <Scene2 />}
-        
+        {scene === 0  && <Scene2
+                            sceneChange={nextScene}
+                            />
+        }
+
         {scene === 1 && <Start
                            sceneChange={nextScene}
                            />

@@ -1,10 +1,18 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import NumpadButton from "./NumpadButton";
 
-function Numpad() {
-
+function Numpad(props) {
+  const { revealButton } = props;
   const [answerCode, setAnswerCode] = useState(generateAnswerCode())
   const [inputCode, setInputCode] = useState(["*", "*", "*", "*"])
+
+  useEffect(() => {
+    if (answerCode.join("") === inputCode.join("")) {
+      console.log("win")
+      revealButton()
+    }
+  }, [inputCode])
+
 
   function updateInputCode(inputDigit) {
     setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
