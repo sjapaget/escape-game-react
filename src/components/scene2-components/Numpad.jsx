@@ -18,7 +18,7 @@ function Numpad(props) {
   }
 
   useEffect(() => {
-    if (attempts >=5) {
+    if (attempts >=5 && answerCode.join("") !== inputCode.join("")) {
       resetCode()
     }
   }, [attempts])
