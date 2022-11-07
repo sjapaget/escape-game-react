@@ -26,7 +26,6 @@ function App() {
     }
   }
 
-
   return (
     <div className='h-screen'>
       <Nav scene={scene}/>
@@ -35,6 +34,7 @@ function App() {
                            sceneChange={nextScene}
                            />
         }
+        
         {scene === 1 && <Scene1
                           startGame={recordStartTime}
                           sceneChange={nextScene}
