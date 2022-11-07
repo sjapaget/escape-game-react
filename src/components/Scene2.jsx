@@ -27,7 +27,7 @@ function Scene2(props) {
       <Numpad revealButton={completeScene}/>
       <p
       >
-      {sceneCompleted ? "That one was easy... the next one won't be!" : "Click on the numbers to see if they are present in the code."}
+      {sceneCompleted ? "That one was easy... the next one won't be!" : "Click on the numbers to see if they are present in the code. A little hint to get you started: maybe brute force isn't the best way..."}
       </p>
       {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="Continue" />}
     </div>

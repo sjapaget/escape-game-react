@@ -7,11 +7,40 @@ function Numpad(props) {
   const [inputCode, setInputCode] = useState(["*", "*", "*", "*"])
   const [attempts, setAttempts] = useState(0);
 
+  function generateButtons(numOfBtns) {
+    const digits = [];
+    for (let i = 0; i < numOfBtns; i++) {
+      digits.push(i + 1)
+    }
+    return digits.map(num => <NumpadButton key={num} digit={num} handleClick={() => handleInputClick(num)}/>)
+  }
+
+  function generateAnswerCode() {
+    const codeArr = Array(4).fill()
+                            .map(() => Math.ceil(Math.random() * 9))
+    return codeArr;
+  }
+
   useEffect(() => {
     if (answerCode.join("") === inputCode.join("")) {
       revealButton()
     }
   }, [inputCode])
+
+  function handleInputClick(inputNum) {
+    updateInputCode(inputNum)
+    addAttempt()
+  }
+
+  function updateInputCode(inputDigit) {
+    setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
+      if (prevInputCode[index] === '*') {
+        return ansNum === inputDigit ? inputDigit.toString() : "*"
+      } else {
+        return prevInputCode[index]
+      }
+    }))
+  }
 
   function addAttempt() {
     setAttempts(prev => prev + 1)
@@ -27,36 +56,6 @@ function Numpad(props) {
     setAnswerCode(generateAnswerCode())
     setAttempts(0)
     setInputCode(["*", "*", "*", "*"])
-  }
-
-  function updateInputCode(inputDigit) {
-    setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
-      if (prevInputCode[index] === '*') {
-        return ansNum === inputDigit ? inputDigit.toString() : "*"
-      } else {
-        return prevInputCode[index]
-      }
-    }))
-  }
-
-  function handleInputClick(inputNum) {
-    updateInputCode(inputNum)
-    addAttempt()
-  }
-
-  function generateButtons(numOfBtns) {
-    const digits = [];
-    for (let i = 0; i < numOfBtns; i++) {
-      digits.push(i + 1)
-    }
-
-    return digits.map(num => <NumpadButton key={num} digit={num} handleClick={() => handleInputClick(num)}/>)
-  }
-
-  function generateAnswerCode() {
-    const codeArr = Array(4).fill()
-                            .map(() => Math.ceil(Math.random() * 9))
-    return codeArr;
   }
 
   return (
