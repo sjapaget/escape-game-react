@@ -1,8 +1,12 @@
 import React from 'react';
-import NextSceneBtn from './NextSceneBtn'
+import { useEffect } from 'react';
+import NextSceneBtn from './NextSceneBtn';
 
 const Scene1 = props => {
-  const { sceneChange } = props;
+  const { sceneChange, startGame } = props;
+
+  useEffect(()=> startGame(), [])
+
   return (
    <div>
      <p>

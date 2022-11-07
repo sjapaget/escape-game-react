@@ -1,28 +1,34 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 
 const EndScene = props => {
   const { start, end, endGame } = props;
-  endGame();
-  const gameDuration = ((end - start) / 1000) / 60;
 
-  const durationInMins = (duration) => {
-    const hrs = (duration / 60);
-    const roundedHrs = Math.floor(hrs);
-    const mins = (hrs - roundedHrs) * 60;
-    const roundedMins = Math.round(mins);
-    const secs = (mins - roundedMins)  *60;
-    const roundedSecs = Math.round(secs)
-    return `You finished in ${roundedHrs}:${roundedMins}:${roundedSecs}`
+  const [timeToFinish, setTimeToFinish] = useState('60:00');
+
+  const calcGameDuration = () => {
+    const gameDuration = end - start;
+    const rawMins = Math.floor(gameDuration / 60000);
+    const mins = rawMins < 10 ? '0' + rawMins : rawMins;
+    const rawSecs = Math.floor((gameDuration % 60000) / 1000);
+    const secs = rawSecs < 10 ? '0' + rawSecs : rawSecs;
+    return `${mins}:${secs}`;
   }
 
+  useEffect(()=> {
+    endGame();
+    setTimeToFinish(calcGameDuration());
+  })
+
   return (
-    <div>
-      <h1>You win!</h1>
-      <p>Well done, you managed to solve all the puzzles and save the painting.</p>
-      <p>You finished in:</p>
-      <h3>{durationInMins(gameDuration)}</h3>
+    <div className='flex flex-col justify-between p-12 bg-slate-100 rounded-lg text-center'>
+      <h1 className='text-8xl my-4'>You win!</h1>
+      <p className='text-3xl'>Well done, you managed to solve all the puzzles and save the painting.
+      <br />
+      <br />
+      Your time is</p>
+      <h3 className='text-4xl'>{timeToFinish}</h3>
     </div>
   )
 }
 
-export default EndScene
+export default EndScene;
