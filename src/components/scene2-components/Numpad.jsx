@@ -14,12 +14,14 @@ function Numpad(props) {
   }, [inputCode])
 
   function addAttempt() {
-    if (attempts < 5) {
-      setAttempts(prev => prev + 1)
-    } else {
+    setAttempts(prev => prev + 1)
+  }
+
+  useEffect(() => {
+    if (attempts >=5) {
       resetCode()
     }
-  }
+  }, [attempts])
 
   function resetCode() {
     setAnswerCode(generateAnswerCode())
