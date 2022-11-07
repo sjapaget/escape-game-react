@@ -5,14 +5,27 @@ function Numpad(props) {
   const { revealButton } = props;
   const [answerCode, setAnswerCode] = useState(generateAnswerCode())
   const [inputCode, setInputCode] = useState(["*", "*", "*", "*"])
+  const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
     if (answerCode.join("") === inputCode.join("")) {
-      console.log("win")
       revealButton()
     }
   }, [inputCode])
 
+  function addAttempt() {
+    if (attempts < 5) {
+      setAttempts(prev => prev + 1)
+    } else {
+      resetCode()
+    }
+  }
+
+  function resetCode() {
+    setAnswerCode(generateAnswerCode())
+    setAttempts(0)
+    setInputCode(["*", "*", "*", "*"])
+  }
 
   function updateInputCode(inputDigit) {
     setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
@@ -28,13 +41,18 @@ function Numpad(props) {
     }))
   }
 
+  function handleInputClick(inputNum) {
+    updateInputCode(inputNum)
+    addAttempt()
+  }
+
   function generateButtons(numOfBtns) {
     const digits = [];
     for (let i = 0; i < numOfBtns; i++) {
       digits.push(i + 1)
     }
 
-    return digits.map(num => <NumpadButton key={num} digit={num} handleClick={() => updateInputCode(num)}/>)
+    return digits.map(num => <NumpadButton key={num} digit={num} handleClick={() => handleInputClick(num)}/>)
   }
 
   function generateAnswerCode() {
@@ -56,6 +74,7 @@ function Numpad(props) {
         <p>
           {inputCode}
         </p>
+        <p>{attempts} of 5 attempts before reset</p>
       </div>
       <p
         className="text-orange-50"
