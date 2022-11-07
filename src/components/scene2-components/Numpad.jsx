@@ -32,11 +32,7 @@ function Numpad(props) {
   function updateInputCode(inputDigit) {
     setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
       if (prevInputCode[index] === '*') {
-        if (ansNum === inputDigit) {
-          return inputDigit.toString();
-        } else {
-          return "*"
-        }
+        return ansNum === inputDigit ? inputDigit.toString() : "*"
       } else {
         return prevInputCode[index]
       }
