@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Start from "./components/Start";
 import Scene1 from "./components/Scene1";
+import Scene2 from "./components/Scene2";
 import EndScene from "./components/EndScene";
 import Nav from "./components/Nav";
 
@@ -30,18 +31,24 @@ function App() {
     <div className='h-screen'>
       <Nav scene={scene}/>
       <div className="flex flex-row justify-center h-5/6 p-4 bg-orange-50 font-mono">
+
         {scene === 0 && <Start
                            sceneChange={nextScene}
                            />
         }
-        
+
         {scene === 1 && <Scene1
                           startGame={recordStartTime}
                           sceneChange={nextScene}
                           />
         }
 
-        {scene === 2 && <EndScene
+        {scene === 2  && <Scene2
+                            sceneChange={nextScene}
+                            />
+        }
+
+        {scene === 3 && <EndScene
                           endGame={recordEndTime}
                           start={startTime}
                           end={endTime}
