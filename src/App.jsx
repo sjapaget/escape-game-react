@@ -31,12 +31,8 @@ function App() {
     <div className='h-screen'>
       <Nav scene={scene}/>
       <div className="flex flex-row justify-center h-5/6 p-4 bg-orange-50 font-mono">
-        {scene === 0  && <Scene2
-                            sceneChange={nextScene}
-                            />
-        }
 
-        {scene === 1 && <Start
+        {scene === 0 && <Start
                            sceneChange={nextScene}
                            />
         }
@@ -45,6 +41,11 @@ function App() {
                           startGame={recordStartTime}
                           sceneChange={nextScene}
                           />
+        }
+
+        {scene === 2  && <Scene2
+                            sceneChange={nextScene}
+                            />
         }
 
         {scene === 3 && <EndScene
