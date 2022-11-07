@@ -5,7 +5,7 @@ function Scene2() {
   return (
     <div
       className="
-        self-center
+        self-center flex flex-col justify-center items-center
       "
     >
       <h1
@@ -18,6 +18,8 @@ function Scene2() {
         What's the code?
       </h1>
       <Numpad />
+      <p
+      >Click on the numbers to see if they are present in the code.</p>
     </div>
   )
 }

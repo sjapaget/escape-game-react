@@ -4,6 +4,21 @@ import NumpadButton from "./NumpadButton";
 function Numpad() {
 
   const [answerCode, setAnswerCode] = useState(generateAnswerCode())
+  const [inputCode, setInputCode] = useState(["*", "*", "*", "*"])
+
+  function updateInputCode(inputDigit) {
+    setInputCode(prevInputCode => answerCode.map((ansNum, index) => {
+      if (prevInputCode[index] === '*') {
+        if (ansNum === inputDigit) {
+          return inputDigit.toString();
+        } else {
+          return "*"
+        }
+      } else {
+        return prevInputCode[index]
+      }
+    }))
+  }
 
   function generateButtons(numOfBtns) {
     const digits = [];
@@ -11,13 +26,13 @@ function Numpad() {
       digits.push(i + 1)
     }
 
-    return digits.map(num => <NumpadButton key={num} digit={num} />)
+    return digits.map(num => <NumpadButton key={num} digit={num} handleClick={() => updateInputCode(num)}/>)
   }
 
   function generateAnswerCode() {
     const codeArr = Array(4).fill()
                             .map(() => Math.ceil(Math.random() * 9))
-    return codeArr.join("");
+    return codeArr;
   }
 
   return (
@@ -31,15 +46,16 @@ function Numpad() {
           bg-black
           text-green-400">
         <p>
-          ****
+          {inputCode}
         </p>
       </div>
       <p
         className="text-orange-50"
-      >{answerCode}</p>
+      >
+        {answerCode}
+      </p>
     </div>
   )
 }
-
 
 export default Numpad

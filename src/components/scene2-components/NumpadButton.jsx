@@ -1,7 +1,7 @@
 import { React } from "react";
 
 function NumpadButton(props) {
-  const { digit } = props
+  const { digit, handleClick} = props
   return (
     <div
     className="
@@ -11,7 +11,9 @@ function NumpadButton(props) {
       text-center
       hover:text-green-400
       hover:shadow-lg
-      hover:cursor-pointer"
+      hover:cursor-pointer
+      "
+      onClick={handleClick}
     >
       <p
         className="
