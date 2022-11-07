@@ -1,7 +1,12 @@
 import React from 'react';
-import Button from './Button'
+import { useEffect } from 'react';
+import NextSceneBtn from './NextSceneBtn';
 
-const Scene1 = () => {
+const Scene1 = props => {
+  const { sceneChange, startGame } = props;
+
+  useEffect(()=> startGame(), [])
+
   return (
    <div>
      <p>
@@ -24,9 +29,9 @@ const Scene1 = () => {
       <li>No looking in the source code while you're playing</li>
       <li>etc.</li>
     </ul>
-    <Button text="Start the game" />
+    <NextSceneBtn nextScene={sceneChange} text="Start the game" />
    </div>
   )
 }
 
-export default Scene1
+export default Scene1;

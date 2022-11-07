@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Button = props => {
+  const { nextScene, text } = props;
   return (
     <button
       className='
@@ -12,11 +13,11 @@ const Button = props => {
       p-4
       text-6xl
       '
-      onClick={props.nextScene}
+      onClick={nextScene}
     >
-      {props.text}
+      {text}
     </button>
   )
 }
 
-export default Button
+export default Button;

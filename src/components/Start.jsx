@@ -1,18 +1,19 @@
 import React from 'react';
-import Button from "./Button"
+import NextSceneBtn from "./NextSceneBtn";
 
 const Start = props => {
+  const { sceneChange } = props;
   return (
-    <div className='flex flex-col justify-between p-12 bg-slate-100 rounded-lg'>
+    <div className='flex flex-col justify-between p-12 bg-slate-100 rounded-lg text-center'>
 
       <h1 className='text-8xl my-4'>Art Escape</h1>
 
-      <Button
+      <NextSceneBtn
         text={"Start"}
-        nextScene={props.sceneChange}
+        nextScene={sceneChange}
        />
     </div>
   )
 }
 
-export default Start
+export default Start;
