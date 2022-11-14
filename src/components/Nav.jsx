@@ -1,5 +1,5 @@
 import React from 'react';
-import logoUrl from '/home/sam/code/sjapaget/react/projects/escape-game-react/src/assets/Esc-Logo-8bit-colour.png'
+import logoUrl from '../assets/Esc-Logo-8bit-colour.png'
 
 const Nav = (props) => {
   const { scene } = props;
