@@ -8,20 +8,36 @@ const Scene1 = props => {
   useEffect(()=> startGame(), [])
 
   return (
-   <div>
-     <p>
+   <div
+    className='
+      flex
+      flex-col
+      self-center
+      lg:mx-24
+      lg:p-12
+      bg-slate-100
+      rounded-lg
+      text-center
+    '
+   >
+     <h1
+      className='
+        text-3xl
+        py-2
+      '
+     >
       Welcome to Art Escape!
-    </p>
-    <hr />
+    </h1>
     <p>
       An escape game where you will have 15 minutes to solve a series of puzzles. Each of the puzzles will give you a clue to the identity of the world's most wanted art thief.
-    </p>
-    <hr />
-    <p>
       If you solve the enigmas and identify the thief - you win! However, if you fail the world's finest cultural artefcts will forever be at risk.
     </p>
-    <hr />
-    <h3>
+    <h3
+      className='
+        text-3xl
+        py-2
+      '
+    >
       The Rules
     </h3>
     <ul>
@@ -29,7 +45,13 @@ const Scene1 = props => {
       <li>No looking in the source code while you're playing</li>
       <li>etc.</li>
     </ul>
-    <NextSceneBtn nextScene={sceneChange} text="Start the game" />
+    <div
+      className='
+        py-2
+      '
+    >
+      <NextSceneBtn nextScene={sceneChange} text="Start" />
+    </div>
    </div>
   )
 }
