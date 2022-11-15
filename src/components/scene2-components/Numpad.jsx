@@ -47,19 +47,28 @@ function Numpad(props) {
   }
 
   useEffect(() => {
-    if (attempts >=5 && answerCode.join("") !== inputCode.join("")) {
+    if (attempts % 5 === 0 && answerCode.join("") !== inputCode.join("")) {
       resetCode()
     }
   }, [attempts])
 
   function resetCode() {
     setAnswerCode(generateAnswerCode())
-    setAttempts(0)
     setInputCode(["*", "*", "*", "*"])
   }
 
-  return (
-    <div className="grid grid-cols-3 gap-4 w-96">
+  function hintReveal(attempts) {
+    let hint = " You're going to need your keyboard";
+
+    if (attempts > 60) {
+      hint = " How do you select everything?"
+    }
+
+    return hint
+  }
+
+    return (
+    <div className="grid grid-cols-3 gap-4 w-96 text-orange-100/">
       {generateButtons(9)}
       <div
         className="
@@ -67,12 +76,17 @@ function Numpad(props) {
           rounded-full
           text-center
           bg-black
-          text-green-400">
+          text-green-400"
+        >
         <p>
           {inputCode}
         </p>
-        <p>{attempts} of 5 attempts before reset</p>
+        <p>{attempts % 5} of 5 attempts before reset</p>
       </div>
+        <p className="col-span-3 text-center">
+          Hint:
+          {(attempts > 30 || attempts > 60) ? hintReveal(attempts) : " Try harder" }
+        </p>
       <p
         className="text-orange-50"
       >

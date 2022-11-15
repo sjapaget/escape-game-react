@@ -3,12 +3,14 @@ import Numpad from "./scene2-components/Numpad";
 import NextSceneBtn from './NextSceneBtn';
 
 function Scene2(props) {
+
   const {sceneChange} = props
   const [sceneCompleted, setSceneCompleted] = useState(false)
 
   function completeScene() {
     setSceneCompleted(prev => !prev)
   }
+
   return (
     <div
       className="
@@ -24,7 +26,7 @@ function Scene2(props) {
       >
         {sceneCompleted ? "You Cracked it!" : "What's the code?"}
       </h1>
-      <Numpad revealButton={completeScene}/>
+      {!sceneCompleted && <Numpad revealButton={completeScene}/>}
       <p
       >
       {sceneCompleted ? "That one was easy... the next one won't be!" : "Click on the numbers to see if they are present in the code. A little hint to get you started: maybe brute force isn't the best way..."}
