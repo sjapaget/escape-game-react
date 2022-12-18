@@ -13,8 +13,6 @@ import img6 from '../assets/pCezanne.jpg';
 import img7 from '../assets/pGaguin.jpg';
 import img8 from '../assets/vGogh.jpg';
 
-
-
 function Scene3(props) {
   const {sceneChange, completeScene, sceneCompleted} = props;
 
@@ -37,12 +35,13 @@ function Scene3(props) {
           revealedSrc: img,
           cardRevealed: false
         }
-      ]
+      ];
     });
     // Randomise the order of the array using a fisher-yates shuffle
     return cards
   };
 
+  // Takes an array of card objects as an argument and returns an array of Card components
   const generateCardComponents = (objArray) => {
     return objArray.map(obj => {
       return (
@@ -54,31 +53,68 @@ function Scene3(props) {
           cardRevealed={obj.cardRevealed}
           handleClick={(e) => handleCardClick(e)}
         />
-      )
-    })
+      );
+    });
+  };
+
+  // State for each individual card
+  const [cardsArray, setCardsArray] = useState(generateCardObjects);
+  // State to track if we are in a first or second click scenario on each click event
+  const [secondClick, setSecondClick] = useState(false);
+  // State to track the previously clicked card and be able to revert it to hidden if it doesn't match the card clicked next
+  const [prevClickedCardIndex, setPrevClickedCardIndex] = useState(-1);
+
+  const findPairCardId = (cardId) => {
+    // Determine the matching card's cardId value
+    const cardIdArr = cardId.split("");
+    const pairCardLetter = cardIdArr[1] === "a" ? "b" : "a";
+    return cardIdArr[0] + pairCardLetter;
   }
 
-  const [cardsArray, setCardsArray] = useState(generateCardObjects);
-
-    const handleCardClick = (event) => {
-    //re-assign the cards state while setting the relevant card's CardRevealed to true
-    const cardId = event.target.attributes.cardid.value
-    //  get index of element to change in cardsArray
-    const clickedCard = cardsArray.find(card => card.cardId === cardId);
-    const clickedCardIndex = cardsArray.indexOf(clickedCard);
+  const toggleCardRevealed = (cardIndex) => {
     setCardsArray(prevArray => prevArray.map((card, index) => {
-      if (index === clickedCardIndex) {
+      if (index === cardIndex) {
         return {
           ...card,
-          cardRevealed: true
-        }
+          cardRevealed: !card.cardRevealed
+        };
       } else {
-        return card
+        return card;
       }
-    }))
+    }));
+  }
 
-    // check if the matching card is also revealed - if not revealed wait 2 secs & revert to hidden, else stay
-    // If no reversion check if all cards are revealed - if yes then trigger win.
+  const handleCardClick = (event) => {
+    // Update secondClick State
+    setSecondClick(prev => !prev);
+
+    //  Get the clicked card, its matching card, and their indexes
+    const clickedCardId = event.target.attributes.cardid.value;
+    const clickedCard = cardsArray.find(card => card.cardId === clickedCardId);
+    const clickedCardIndex = cardsArray.indexOf(clickedCard);
+    // Update the cardsArray state to reveal the image of the clicked card
+    toggleCardRevealed(clickedCardIndex);
+
+    if (secondClick) {
+      // check if the matching card is also revealed
+      const pairCardId = findPairCardId(clickedCardId);
+      const pairCard = cardsArray.find(card => card.cardId === pairCardId);
+      const pairCardIndex = cardsArray.indexOf(pairCard);
+
+      if (pairCard.cardRevealed) {
+        //Stay revealed && check if all cards are revealed
+          // if all cards revealed trigger win
+      } else {
+        // wait 1 sec & revert both revealed cards to hidden,
+        setTimeout(() => {
+          toggleCardRevealed(clickedCardIndex);
+          toggleCardRevealed(prevClickedCardIndex);
+        }, 1000);
+      }
+    } else {
+      // Store the clicked card so we can revert it back later if needed
+      setPrevClickedCardIndex(clickedCardIndex);
+    }
   };
 
   return (
