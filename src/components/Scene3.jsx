@@ -34,14 +34,12 @@ function Scene3(props) {
   }
 
   return (
-    <div
-      className="self-center flex flex-col justify-center items-center"
-    >
-      <h1>How good is your memory?</h1>
       <main
-        className="grid grid-cols-2 gap-4"
+        className="h-full overflow-hidden grid grid-cols-12 gap-4"
       >
-        <aside>
+        <aside
+          className="col-span-5 p-2"
+        >
           {/* Info window here */}
           <h2>The rules</h2>
           <ul>
@@ -55,14 +53,11 @@ function Scene3(props) {
         </aside>
 
         <div
-          className="grid grid-cols-4 gap-1"
+          className="h-4/6 col-span-7 grid grid-cols-4 gap-4 place-items-center"
         >
           {generateCards()}
         </div>
       </main>
-
-
-    </div>
   )
 }
 

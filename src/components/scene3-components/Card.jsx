@@ -4,10 +4,9 @@ function Card(props) {
   const {cardRevealed, revealedSrc, hiddenSrc} = props
 
   return (
-    <img
-      src={cardRevealed ? revealedSrc : hiddenSrc }
-      className=''
-    />
+      <img
+        className='w-40'
+        src={cardRevealed ? revealedSrc : hiddenSrc } />
   )
 }
 
