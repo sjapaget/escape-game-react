@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import NextSceneBtn from './NextSceneBtn';
 import Card from './scene3-components/Card';
 
@@ -18,23 +18,71 @@ import img8 from '../assets/vGogh.jpg';
 function Scene3(props) {
   const {sceneChange, completeScene, sceneCompleted} = props;
 
-  // Returns an array of 16 Card components in a random order, each image in the imgSources array must be used twice,
-  const generateCards = () => {
+  // Returns an array of 16 Card objects in a random order, each image in the imgSources array must be used twice,
+  const generateCardObjects = () => {
     const imgSources = [img1, img2, img3, img4, img5, img6, img7, img8];
     // iterate over imgSources and generate 2 Card elements for each img
-    const cards = imgSources.flatMap(img => {
+    const cards = imgSources.flatMap((img, index) => {
       // Store these 2 card elements in an array
       return [
-        <Card revealedSrc={img} hiddenSrc={hiddenImg} cardRevealed={false} />,
-        <Card revealedSrc={img} hiddenSrc={hiddenImg} cardRevealed={false}/>
+        {
+          cardId: index + "a",
+          hiddenSrc: hiddenImg,
+          revealedSrc: img,
+          cardRevealed: false
+        },
+        {
+          cardId: index + "b",
+          hiddenSrc: hiddenImg,
+          revealedSrc: img,
+          cardRevealed: false
+        }
       ]
     });
     // Randomise the order of the array using a fisher-yates shuffle
     return cards
+  };
+
+  const generateCardComponents = (objArray) => {
+    return objArray.map(obj => {
+      return (
+        <Card
+          key={obj.cardId}
+          cardId={obj.cardId}
+          hiddenSrc={obj.hiddenSrc}
+          revealedSrc={obj.revealedSrc}
+          cardRevealed={obj.cardRevealed}
+          handleClick={(e) => handleCardClick(e)}
+        />
+      )
+    })
   }
 
+  const [cardsArray, setCardsArray] = useState(generateCardObjects);
+
+    const handleCardClick = (event) => {
+    //re-assign the cards state while setting the relevant card's CardRevealed to true
+    const cardId = event.target.attributes.cardid.value
+    //  get index of element to change in cardsArray
+    const clickedCard = cardsArray.find(card => card.cardId === cardId);
+    const clickedCardIndex = cardsArray.indexOf(clickedCard);
+    setCardsArray(prevArray => prevArray.map((card, index) => {
+      if (index === clickedCardIndex) {
+        return {
+          ...card,
+          cardRevealed: true
+        }
+      } else {
+        return card
+      }
+    }))
+
+    // check if the matching card is also revealed - if not revealed wait 2 secs & revert to hidden, else stay
+    // If no reversion check if all cards are revealed - if yes then trigger win.
+  };
+
   return (
-      <main
+    <main
         className="h-full overflow-hidden grid grid-cols-12 gap-4"
       >
         <aside
@@ -55,7 +103,7 @@ function Scene3(props) {
         <div
           className="h-4/6 col-span-7 grid grid-cols-4 gap-4 place-items-center"
         >
-          {generateCards()}
+          {generateCardComponents(cardsArray)}
         </div>
       </main>
   )
