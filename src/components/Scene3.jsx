@@ -39,9 +39,24 @@ function Scene3(props) {
         }
       ];
     });
+
     // Randomise the order of the array using a fisher-yates shuffle
+    const randomlyOrderedCards = shuffleCards(cards);
     return cards
   };
+
+  function shuffleCards(cards) {
+    let cardsLength = cards.length;
+    let randomisedCards = cards;
+    for (let i = cardsLength - 1; i > 0; i--) {
+      const rand = Math.floor(Math.random() * cardsLength);
+      const placeholder = cards[i];
+      cards[i] = cards[rand];
+      cards[rand] = placeholder;
+    }
+    console.log(randomisedCards)
+    return randomisedCards;
+  }
 
   // Takes an array of card objects as an argument and returns an array of Card components
   const generateCardComponents = (objArray) => {
