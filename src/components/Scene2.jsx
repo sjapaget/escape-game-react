@@ -5,7 +5,7 @@ import NextSceneBtn from './NextSceneBtn';
 function Scene2(props) {
 
   const {sceneChange, completeScene, sceneCompleted} = props
-  
+
   return (
     <div
       className="

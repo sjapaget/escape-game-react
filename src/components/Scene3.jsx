@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from "react";
 import NextSceneBtn from './NextSceneBtn';
 import Card from './scene3-components/Card';
+import Info from './scene3-components/Info';
+
 
 // Image imports
 import hiddenImg from '../assets/hidden.jpg';
@@ -122,30 +124,18 @@ function Scene3(props) {
   };
 
   return (
-    <main
-        className="h-full overflow-hidden grid grid-cols-12 gap-4"
-      >
-        <aside
-          className="col-span-5 p-2"
-        >
-          {/* Info window here */}
-          <h2>The rules</h2>
-          <ul>
-            <li>Click a card to reveal it</li>
-            <li>Click on a second card to reveal it</li>
-            <li>If they match, the cards will remain revealed</li>
-            <li>If they don't match they will both turn back over</li>
-            <li>Keep playing until all the cards are revealed</li>
-          </ul>
-          {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="Continue" />}
-        </aside>
-
-        <div
-          className="h-4/6 col-span-7 grid grid-cols-4 gap-4 place-items-center"
-        >
-          {generateCardComponents(cardsArray)}
+    <>
+      <main className="grid grid-cols-12 gap-4">
+      {!sceneCompleted && <Info sceneChange={sceneChange} sceneCompleted={sceneCompleted} />}
+          <div className="col-span-7 grid grid-cols-4 gap-4 place-items-center">
+            {!sceneCompleted && generateCardComponents(cardsArray)}
+          </div>
+        </main>
+        <div className="self-center flex flex-col justify-center items-center">
+          {sceneCompleted && <h1>Looks like you've got quite the memory.</h1>}
+          {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="On to the next one" /> }
         </div>
-      </main>
+    </>
   )
 }
 

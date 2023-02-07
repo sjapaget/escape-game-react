@@ -7,7 +7,7 @@ function Card(props) {
       <img
         cardid={cardId}
         checked={cardRevealed}
-        className='w-40'
+        className='object-cover w-32'
         src={cardRevealed ? revealedSrc : hiddenSrc }
         onClick={handleClick}
         />
