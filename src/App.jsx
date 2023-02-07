@@ -45,7 +45,7 @@ function App() {
       <Nav scene={scene}/>
       <div className="flex flex-row justify-center p-4 bg-orange-50 font-mono">
 
-        {scene === 5 && <Start
+        {scene === 0 && <Start
                            sceneChange={nextScene}
                            />
         }
@@ -63,7 +63,7 @@ function App() {
                             />
         }
 
-        {scene === 0  && <Scene3
+        {scene === 3  && <Scene3
                             sceneChange={nextScene}
                             completeScene={toggleSceneCompleted}
                             sceneCompleted={sceneCompleted}
