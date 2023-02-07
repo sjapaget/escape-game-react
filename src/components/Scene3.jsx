@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import NextSceneBtn from './NextSceneBtn';
 import Card from './scene3-components/Card';
 
@@ -64,6 +64,13 @@ function Scene3(props) {
   // State to track the previously clicked card and be able to revert it to hidden if it doesn't match the card clicked next
   const [prevClickedCardIndex, setPrevClickedCardIndex] = useState(-1);
 
+  // Check for win condition
+  useEffect(() => {
+    if (cardsArray.every((card) => card.cardRevealed)) {
+      completeScene();
+    }
+  }, [cardsArray]);
+
   const findPairCardId = (cardId) => {
     // Determine the matching card's cardId value
     const cardIdArr = cardId.split("");
@@ -99,17 +106,14 @@ function Scene3(props) {
       // check if the matching card is also revealed
       const pairCardId = findPairCardId(clickedCardId);
       const pairCard = cardsArray.find(card => card.cardId === pairCardId);
-      const pairCardIndex = cardsArray.indexOf(pairCard);
 
-      if (pairCard.cardRevealed) {
-        //Stay revealed && check if all cards are revealed
-          // if all cards revealed trigger win
-      } else {
+      if (!pairCard.cardRevealed) {
         // wait 1 sec & revert both revealed cards to hidden,
         setTimeout(() => {
           toggleCardRevealed(clickedCardIndex);
           toggleCardRevealed(prevClickedCardIndex);
         }, 1000);
+
       }
     } else {
       // Store the clicked card so we can revert it back later if needed
