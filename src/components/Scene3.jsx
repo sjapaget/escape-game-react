@@ -54,7 +54,6 @@ function Scene3(props) {
       cards[i] = cards[rand];
       cards[rand] = placeholder;
     }
-    console.log(randomisedCards)
     return randomisedCards;
   }
 
@@ -139,18 +138,12 @@ function Scene3(props) {
   };
 
   return (
-    <>
-      <main className="grid grid-cols-12 gap-4">
-      {!sceneCompleted && <Info sceneChange={sceneChange} sceneCompleted={sceneCompleted} />}
-          <div className="col-span-7 grid grid-cols-4 gap-4 place-items-center">
-            {!sceneCompleted && generateCardComponents(cardsArray)}
-          </div>
-        </main>
-        <div className="self-center flex flex-col justify-center items-center">
-          {sceneCompleted && <h1>Looks like you've got quite the memory.</h1>}
-          {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="On to the next one" /> }
-        </div>
-    </>
+    <main className="grid grid-cols-12 gap-4">
+      <Info sceneChange={sceneChange} sceneCompleted={sceneCompleted} />
+      <div className="col-span-7 grid grid-cols-4 gap-4 place-items-center">
+        {generateCardComponents(cardsArray)}
+      </div>
+    </main>
   )
 }
 
