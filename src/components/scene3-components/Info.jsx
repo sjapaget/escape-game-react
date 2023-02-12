@@ -5,8 +5,8 @@ function Info(props) {
   const {sceneChange, sceneCompleted} = props;
 
   return (
-    <aside className="col-span-5 p-2 flex flex-col justify-around">
-      <div>
+    <aside className="col-span-5 p-2 flex flex-col justify-evenly">
+      <div className=''>
         <h2 className="p-4 text-lg text-center font-bold">The rules</h2>
         <ul>
           <li>Click a card to reveal it</li>
@@ -16,8 +16,10 @@ function Info(props) {
           <li>Keep playing until all the cards are revealed</li>
         </ul>
       </div>
-      {sceneCompleted && <h1>Looks like you've got quite the memory!</h1>}
-      {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="Continue" /> }
+      <div className='h-1/3 text-center'>
+        {sceneCompleted && <h1 className='p-4'>Looks like you've got quite the memory!</h1>}
+        {sceneCompleted && <NextSceneBtn nextScene={sceneChange} text="Continue" /> }
+      </div>
     </aside>
   )
 }
