@@ -4,12 +4,7 @@ import NextSceneBtn from './NextSceneBtn';
 
 function Scene2(props) {
 
-  const {sceneChange} = props
-  const [sceneCompleted, setSceneCompleted] = useState(false)
-
-  function completeScene() {
-    setSceneCompleted(prev => !prev)
-  }
+  const {sceneChange, completeScene, sceneCompleted} = props
 
   return (
     <div
